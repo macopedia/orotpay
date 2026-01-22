@@ -1,0 +1,9 @@
+{% set data = record.dataArray() %}
+
+<div data-page-component-module="orotpay/js/app/components/tpay-logs-component">
+    <a href="#" class="tpay-button-logs btn btn--outlined" data-id="tpay-logs-{{ data.id }}" data-hidden="1" data-show-label="Pokaż" data-hide-label="Ukryj">Pokaż</a>
+
+    <pre style="display: none" id="tpay-logs-{{ data.id }}">
+        <code>{{ {'request': data.request|gdpr_mask, 'response': data.response|gdpr_mask, 'exceptions': data.webhookRequestLogs|gdpr_mask}|json_encode(constant('JSON_PRETTY_PRINT')) }}</code>
+    </pre>
+</div>

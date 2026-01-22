@@ -1,0 +1,18 @@
+layout:
+    actions:
+        - '@add':
+              id: order_retry_payment_button
+              blockType: link
+              parentId: order_info_column_right
+              siblingId: order_payment_status
+
+              prepend: false
+              options:
+                route_name: tpay_payment_retry
+                route_parameters:
+                  id: '=data["order"].getId()'
+                text: 'macopedia.tpay.retry_payment.button.retry'
+                visible: '=data["macopedia_tpay_retry_method_provider"].getPaymentMethod(data["order"]) !== null'
+                label: ''
+                additional_block_prefixes: ['order_info_column_element']
+

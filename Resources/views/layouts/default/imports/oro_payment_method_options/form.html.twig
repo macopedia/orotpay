@@ -1,0 +1,92 @@
+{% block _oro_tpay_credit_card_widget %}
+    {% set creditCardComponent = options.creditCardComponent|default('orotpay/js/app/components/credit-card-component') %}
+    {% set creditCardComponentOptions = options.creditCardComponentOptions|default({})|merge({paymentMethod: paymentMethod}) %}
+    {% set hasSavedCard = creditCardComponentOptions.cards is defined %}
+
+    <div class="{{ class_prefix }}-form__payment-methods"
+         data-page-component-module="{{ creditCardComponent }}"
+         data-page-component-options="{{ creditCardComponentOptions|json_encode }}">
+
+        {% if hasSavedCard %}
+            <div class="{{ class_prefix }}-form__select tpay-card-select" data-authorized-cards>
+                <select name="data-authorized-cards" data-authorized-cards-selector>
+                    {% for card in creditCardComponentOptions.cards %}
+                    <option data-brand="{{ card.brand|lower }}" value="{{ card.id }}"><span class="credit-card-icon credit-card-icon_{{ card.brand|lower }}"
+                                                        aria-hidden="true"></span> **** {{ card.tail }}</option>
+                    {% endfor %}
+                </select>
+                <a href="#" class="{{ class_prefix }}-form__payment-methods-different-card-handle"
+                   data-different-card-handle>
+                    {{ 'macopedia.tpay.frontend.use_different_card'|trans }}
+                </a>
+            </div>
+        {% endif %}
+
+        <div {% if hasSavedCard %} style="display: none;" data-different-card{% endif %}>
+            {% if hasSavedCard %}
+                <div class="{{ class_prefix }}-form__payment-methods-different-card">
+                    <a href="#" class="{{ class_prefix }}-form__payment-methods-authorized-card-handle"
+                       data-authorized-card-handle>
+                        {{ 'macopedia.tpay.frontend.use_authorized_card'|trans }}
+                    </a>
+                </div>
+            {% endif %}
+
+            <ul class="{{ class_prefix }}-form__payment-methods-list"
+                aria-label="{{ 'oro_frontend.avaliable_credit_cards.aria_label'|trans }}">
+                {% for cc_name in ['mastercard', 'visa'] %}
+                    <li class="{{ class_prefix }}-form__payment-methods-item" aria-label="{{ cc_name }}">
+                        <span class="credit-card-icon credit-card-icon_{{ cc_name }}" aria-hidden="true"></span>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <div class="{{ class_prefix }}-form__payment-methods-form" data-card-form="data-card-form">
+                {{ form_row(form.number, {class_prefix: class_prefix}) }}
+
+                <div class="form-row">
+                    {{ form_label(form.expiration_date) }}
+
+                    <div class="{{ class_prefix }}-form__select-container">
+                        <div class="{{ class_prefix }}-form__select {{ class_prefix }}-form__select--exp-month">
+                            {{ form_widget(form.expiration_date_month, {'attr': {
+                                'data-expiration-date-month': true,
+                                'autocomplete': 'cc-exp-month'
+                            }}) }}
+                        </div>
+                        <div class="{{ class_prefix }}-form__select {{ class_prefix }}-form__select--exp-year">
+                            {{ form_widget(form.expiration_date_year, {'attr': {
+                                'data-expiration-date-year': true,
+                                'autocomplete': 'cc-exp-year'
+                            }
+                            }) }}
+                        </div>
+                    </div>
+                    {{ form_row(form.expiration_date, {class_prefix: class_prefix}) }}
+                </div>
+
+                {{ form_row(form.cvv, {class_prefix: class_prefix}) }}
+
+                {{ form_row(form.save_for_later, {class_prefix: class_prefix}) }}
+
+                {{ block('_oro_tpay_policy', '@OroTpay/layouts/default/imports/oro_payment_method_options/_legal.html.twig') }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block _oro_tpay_visa_mobile_phone_widget %}
+    {% set visaMobileComponent = options.blikCompontent|default('orotpay/js/app/components/visa-mobile-component') %}
+    {% set visaMobileCompontentOptions = options.visaMobileCompontentOptions|default({})|merge({paymentMethod: paymentMethod}) %}
+
+    <div class="{{ class_prefix }}-form__payment-methods" data-page-component-module="{{ visaMobileComponent }}"
+         data-page-component-options="{{ visaMobileCompontentOptions|json_encode }}">
+        <div class="{{ class_prefix }}-form__payment-methods-form" data-visa-mobile-form="data-visa-mobile-form">
+            {% for child in form.children %}
+                {{ form_row(child, {class_prefix: class_prefix}) }}
+            {% endfor %}
+
+            {{ block('_oro_tpay_policy', '@OroTpay/layouts/default/imports/oro_payment_method_options/_legal.html.twig') }}
+        </div>
+    </div>
+{% endblock %}

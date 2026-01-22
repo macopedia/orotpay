@@ -1,0 +1,64 @@
+{% block _order_review_payment_methods_tpay_widget -%}
+    {% if options.payment_method is defined %}
+        <div class="hidden"
+             data-page-component-module="oropayment/js/app/components/payment-method-component"
+             data-page-component-options="{{ {paymentMethod: options.payment_method}|json_encode }}">
+        </div>
+    {% endif %}
+{%- endblock %}
+
+
+{% block _order_review_payment_methods_tpay_blik_widget -%}
+    {% if options.payment_method is defined %}
+        <div class="tpay-blik-form" data-page-component-module="orotpay/js/app/components/blik-component"
+             data-page-component-options="{{ {
+                 paymentMethod: options.payment_method,
+                 app_alt: 'BLIK',
+                 app_icon: asset('bundles/orotpay/img/tpay_blik.png')
+             }|json_encode }}"
+        >
+            {{ form_widget(
+                view.options.formView,
+                {class_prefix: class_prefix, paymentMethod: options.payment_method, options: view.options}
+            ) }}
+        </div>
+    {% endif %}
+{%- endblock %}
+
+{% block _order_review_payment_methods_tpay_visa_mobile_widget -%}
+    {% if options.payment_method is defined %}
+        <div class="hidden"
+             data-page-component-module="orotpay/js/app/components/visa-mobile-component"
+             data-page-component-options="{{ {
+                 paymentMethod: options.payment_method,
+                 app_alt: 'Visa Mobile',
+                 app_icon: asset('bundles/orotpay/img/tpay_visa_mobile.png')
+             }|json_encode }}">
+        </div>
+    {% endif %}
+{%- endblock %}
+
+{% block _order_review_payment_methods_tpay_google_pay_widget %}
+    {% set component = view.options.compontent|default('orotpay/js/app/components/google-pay-component') %}
+    {% set componentOptions = view.options.componentOptions|default({})|merge({paymentMethod: options.payment_method}) %}
+    <div class="hidden" data-page-component-module="{{ component }}" data-page-component-options="{{ componentOptions|json_encode }}"></div>
+{% endblock %}
+
+{% block _order_review_payment_methods_tpay_apple_pay_widget %}
+    {% set component = view.options.compontent|default('orotpay/js/app/components/apple-pay-component') %}
+    {% set componentOptions = view.options.componentOptions|default({})|merge({paymentMethod: options.payment_method}) %}
+    <div class="hidden" data-page-component-module="{{ component }}" data-page-component-options="{{ componentOptions|json_encode }}"></div>
+{% endblock %}
+
+{% block _payment_methods_tpay_apple_pay_widget %}
+    <div class="{{ class_prefix }}-form__payment-methods">
+    </div>
+{% endblock %}
+
+{% block _order_review_additional_data_field_widget %}
+    {% if form.additional_data is defined %}
+        <div data-page-component-module="orocheckout/js/app/components/payment-additional-data-component">
+            {{ form_row(form.additional_data) }}
+        </div>
+    {% endif %}
+{% endblock %}

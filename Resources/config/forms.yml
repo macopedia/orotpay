@@ -1,0 +1,36 @@
+services:
+  macopedia_tpay.form.type.credit_card:
+    class: Macopedia\Bundle\TpayBundle\Form\Type\CreditCardType
+    tags:
+      - { name: form.type, alias: macopedia_tpay_credit_card }
+    arguments:
+      - '@translator'
+
+  macopedia_tpay.form.type.blik_token:
+    class: Macopedia\Bundle\TpayBundle\Form\Type\BlikTokenType
+    tags:
+      - { name: form.type, alias: macopedia_tpay_blik_token }
+    arguments:
+      - '@translator'
+
+  macopedia_tpay.form.type.visa_mobile:
+    class: Macopedia\Bundle\TpayBundle\Form\Type\VisaMobileType
+    tags:
+      - { name: form.type, alias: macopedia_tpay_visa_mobile }
+    arguments:
+      - '@translator'
+
+  macopedia_tpay.form.extension.workflow_order_step:
+    class: Macopedia\Bundle\TpayBundle\Form\Extension\WorkflowOrderReviewExtension
+    tags:
+      - { name: form.type_extension, extended_type: Oro\Bundle\WorkflowBundle\Form\Type\WorkflowTransitionType }
+
+  macopedia_tpay.form.gateway.settings:
+    class: Macopedia\Bundle\TpayBundle\Form\Type\GatewaySettingsType
+    arguments:
+      - '@logger'
+      - '@translator'
+      - '@macopedia_tpay.factory.config'
+      - '@macopedia_tpay.gateway.factory'
+    tags:
+      - { name: form.type, alias: macopedia_tpay_gateway_settings }

@@ -1,0 +1,12 @@
+dynamic-imports:
+    oropayment:
+        - orotpay/js/app/components/credit-card-component
+        - orotpay/js/app/components/authorized-credit-card-component
+        - orotpay/js/app/components/blik-component
+        - orotpay/js/app/components/pay-by-link-component
+        - orotpay/js/app/components/redirect-component
+        - orotpay/js/app/components/visa-mobile-component
+        - orotpay/js/app/components/google-pay-select-component
+        - orotpay/js/app/components/google-pay-component
+        - orotpay/js/app/components/apple-pay-select-component
+        - orotpay/js/app/components/apple-pay-component

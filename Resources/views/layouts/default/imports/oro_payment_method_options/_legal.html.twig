@@ -1,0 +1,11 @@
+{% block _oro_tpay_policy %}
+    <div class="tpay-legal">
+        <div class="form-row">
+            {{ 'macopedia.tpay.frontend.legal.policy'|trans({'%url%': options.tpayPolicyUrl} )|raw }}
+        </div>
+
+        <div class="form-row">
+            {{ 'macopedia.tpay.frontend.legal.regulations'|trans({'%url%': options.tpayRegulationsUrl } )|raw }}
+        </div>
+    </div>
+{% endblock %}

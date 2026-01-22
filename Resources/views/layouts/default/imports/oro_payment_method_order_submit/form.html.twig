@@ -1,0 +1,15 @@
+{% block _oro_tpay_blik_token_widget %}
+    {% set blikComponent = options.blikCompontent|default('orotpay/js/app/components/blik-component') %}
+    {% set blikCompontentOptions = options.blikCompontentOptions|default({})|merge({paymentMethod: paymentMethod}) %}
+
+    <div class="{{ class_prefix }}-form__payment-methods" data-page-component-module="{{ blikComponent }}"
+         data-page-component-options="{{ blikCompontentOptions|json_encode }}">
+        <div class="{{ class_prefix }}-form__payment-methods-form" data-blik-form="data-blik-form">
+            {% for child in form.children %}
+                {{ form_row(child, {class_prefix: class_prefix}) }}
+            {% endfor %}
+
+            {{ block('_oro_tpay_policy', '@OroTpay/layouts/default/imports/oro_payment_method_options/_legal.html.twig') }}
+        </div>
+    </div>
+{% endblock %}

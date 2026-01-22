@@ -1,0 +1,29 @@
+datagrids:
+  tpay-payments:
+    extends: payment-transactions-grid
+    source:
+      query:
+        where:
+          and:
+            - payment_transaction.paymentMethod like :method_prefix
+      bind_parameters:
+        method_prefix:
+          default: 'tpay_%'
+          type: string
+    filters:
+      columns:
+        paymentMethod:
+          type: string
+          data_name: payment_transaction.paymentMethod
+        action:
+          type: string
+          data_name: payment_transaction.action
+        createdAt:
+          type: datetime
+          data_name: payment_transaction.createdAt
+        updatedAt:
+          type: datetime
+          data_name: payment_transaction.updatedAt
+        reference:
+          type: string
+          data_name: payment_transaction.reference

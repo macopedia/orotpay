@@ -1,0 +1,17 @@
+{% block _order_retry_payment_message_widget %}
+    {% set attr = layout_attr_defaults(attr, {
+        '~class': ' form-buttons'
+    }) %}
+    <div{{ block('block_attributes') }}>
+        {{ block_widget(block) }}
+    </div>
+{% endblock %}
+
+{% block _order_retry_payment_status_buttons_widget %}
+    {% set attr = layout_attr_defaults(attr, {
+        '~class': ' form-buttons'
+    }) %}
+    <div{{ block('block_attributes') }}>
+        {{ block_widget(block) }}
+    </div>
+{% endblock %}

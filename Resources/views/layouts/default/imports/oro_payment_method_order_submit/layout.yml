@@ -1,0 +1,20 @@
+layout:
+  actions:
+    - '@setBlockTheme':
+        themes:
+          - 'layout.html.twig'
+    - '@setFormTheme':
+        themes:
+          - 'form.html.twig'
+    - '@move':
+        prepend: true
+        id: payment_additional_data
+        parentId: checkout_order_summary_inner
+
+    - '@add':
+        id: order_review_additional_data_field
+        parentId: checkout_form_fields
+        blockType: block
+        options:
+          vars:
+            form: '=data["oro_checkout_transition_form"].getTransitionFormView(data["workflowItem"])'

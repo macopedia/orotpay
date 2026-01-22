@@ -1,0 +1,16 @@
+services:
+  Macopedia\Bundle\TpayBundle\Method\View\TpayRedirectView:
+    arguments:
+      - '@macopedia_tpay.legal'
+    tags:
+      - { name: oro_tpay.payment.method.view }
+
+  Macopedia\Bundle\TpayBundle\Method\TpayRedirectMethod:
+    arguments:
+      - '@macopedia_tpay.payment.payload.createtransaction'
+      - '@macopedia_tpay.gateway.factory'
+      - '@macopedia_tpay.payment.response.factory'
+      - '@logger'
+      - '@macopedia_tpay.factory.notification_verifier'
+    tags:
+      - { name: oro_tpay.payment.method }

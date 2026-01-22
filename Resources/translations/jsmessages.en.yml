@@ -1,0 +1,6 @@
+macopedia:
+  tpay:
+    frontend:
+      modal:
+        app_confirm: 'Confirm in mobile application'
+

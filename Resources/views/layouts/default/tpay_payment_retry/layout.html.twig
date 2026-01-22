@@ -1,0 +1,41 @@
+{% block _order_retry_payment_container_widget %}
+    {% set attr = layout_attr_defaults(attr, {
+        '~class': ' customer-user-form',
+        'id':  'retry-form',
+        'data-focusable': true,
+        'data-content': 'retry-form'
+    }) %}
+
+    <div{{ block('block_attributes') }}>
+        {{ block_widget(block) }}
+    </div>
+{% endblock %}
+
+{% block _order_retry_payment_form_actions_widget %}
+    {% set attr = layout_attr_defaults(attr, {
+        '~class': ' form-buttons'
+    }) %}
+    <div{{ block('block_attributes') }}>
+        {{ block_widget(block) }}
+    </div>
+{% endblock %}
+
+{% block _order_retry_payment_form_widget %}
+    <div{{ block('block_attributes') }}>
+        {{ block_widget(block) }}
+    </div>
+{% endblock %}
+
+{% block _order_retry_payment_form_legal_widget %}
+    <div class="form-buttons">
+        <div class="tpay-legal">
+            <div class="form-row">
+                {{ 'macopedia.tpay.frontend.legal.policy'|trans({'%url%': urls.policyUrl|default('')} )|raw }}
+            </div>
+
+            <div class="form-row">
+                {{ 'macopedia.tpay.frontend.legal.regulations'|trans({'%url%': urls.regulationsUrl|default('') } )|raw }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

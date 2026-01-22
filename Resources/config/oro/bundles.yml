@@ -1,0 +1,2 @@
+bundles:
+  - { name: Macopedia\Bundle\TpayBundle\OroTpayBundle, priority: 80 }

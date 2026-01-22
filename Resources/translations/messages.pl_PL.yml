@@ -1,0 +1,109 @@
+macopedia:
+  tpay:
+    transaction_description: "Zamówienie #%orderId%"
+    apple_pay_label: 'Płatność za zamówienie'
+    navigation:
+      tpay:
+        header: 'Tpay - płatności online'
+        payment_transactions: 'Historia płatności'
+    methods:
+      credit_card: "Karta"
+      blik: "BLIK"
+      redirect: "Po złożeniu zamówienia przekierujemy do Tpay w celu opłacenia zamówienia."
+      visa_mobile: "VISA Mobile"
+
+    datagrid:
+      transaction_id:
+        label: 'ID transakcji'
+      transaction_title:
+        label: 'Tytuł'
+
+    frontend:
+      errors:
+        required: 'Pole jest wymagane'
+        required_channel: 'Wybierz kanał płatności'
+
+      legal:
+        regulations: 'Płacąc, <a href="%url%" target="blank">akceptujesz regulamin</a>.'
+        policy: 'Administratorem danych osobowych jest Krajowy Integrator Płatności spółka akcyjna z siedzibą w Poznaniu. <a href="%url%" target="blank">Czytaj więcej</a>.'
+
+      tips:
+        blik_code_info: 'Kod BLIK należy wprawdzić na ostatnim kroku koszyka.'
+        pragma_info: "Podczas składania zamówienia przekierujemy do wniosku płatności odroczonych. Następnie następuje weryfikacja kredytowa."
+
+      labels:
+        blik:
+          token: "Kod Blik"
+        card:
+          number: "Numer karty"
+          expiration_date:
+            full: "Data wygaśnięcia"
+            month: "Miesiąc"
+            year: "Rok"
+          cvv: "CVC2/CVV2"
+          save_for_later: "Zapisz kartę"
+        visa_mobile:
+          phone: "Numer telefonu"
+
+      use_different_card: 'Użyj innej karty'
+      use_authorized_card: 'Użyj istniejącej karty'
+    system_configuration:
+      fields:
+        apple_pay_domain_verification:
+          label: 'Weryfikacja domeny Apple Pay'
+          tooltip: 'Weryfikacja domeny Apple Pay jest wymagana podczas opłacania za zamówienie w koszyku. Sam dostęp do metody jest konfigurowany za pomocą Integracji (Tpay) / Zasad płatności.'
+    settings:
+      gateway_configuration:
+        client_id: 'ID klient'
+        client_secret: 'Secret'
+        production_mode: 'Tryb produkcjny'
+        merchant_id: 'Merchant ID'
+        google_merchant_id: 'Google Merchant ID'
+        apple_merchant_id: 'Apple Merchant ID'
+        redirect_hidden_in_checkout: 'Ukryj płatność z przekierowaniem na Panel Transakcyjny Tpay'
+        merchant_rsa_key: 'Klucz RSA dla obsługi kart'
+        notification_security_code: '[Powiadomienia] Kod bezpieczeństwa'
+        yes_label: 'Tak'
+        no_label: 'Nie'
+
+      labels.label: 'Etykiety Płatności z przekierowaniem'
+      short_labels.label: 'Skrócone etykiety płatności z przekierowaniem'
+      blik.label: 'Etykiety BLIKa'
+      cards.label: 'Etykiety płatności kartą'
+      pay_by_links.label: 'Etykiety płatności online'
+      visa_mobile.label: 'Etykiety Visa Mobile'
+      pragma_pay.label: 'Etykiety Pragma Pay'
+      apple_pay.label: 'Etykiety Apple Pay'
+      google_pay.label: 'Etykiety Google Pay'
+
+      transport:
+        label: Tpay
+      validation:
+        wrong_credentials: 'Nieprawidłowe dane dostępowe konta Tpay!'
+
+    channel_type:
+      label: Tpay
+
+    payment_method_message: 'Zapłać za pomocą Tpay'
+
+    retry_payment:
+      button:
+        retry: 'Zapłać ponownie'
+        back_to_order: 'Wróć do zamówienia'
+      header:
+        label: "Ponowna płatność"
+
+      order_header:
+        label: "Ponowna płatność za zamówienie #%identifier%"
+
+      return:
+        success: "Dziękujemy, płatność wykonana poprawnie"
+        error: "Przepraszamy, wystąpił błąd podczas przetwarzania płatności. Spróbuj ponownie poźniej."
+oro:
+  payment:
+    paymenttransaction:
+      types:
+        failed:
+          label: "Niepowodzenie"
+        saved_card:
+          label: "Zapamiętana karta"

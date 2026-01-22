@@ -1,0 +1,7 @@
+parameters:
+  oro_tpay.tax_field: ~
+  oro_tpay.gateway.logging: true
+  oro_tpay.channels.expiresAfter: 300
+  oro_tpay.automatic_cancellation.after: 7
+  oro_tpay.automatic_cancellation.cron_definition: '5 3 * * *'
+  oro_tpay.payment.method.identifier_prefix: tpay

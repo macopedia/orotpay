@@ -1,0 +1,26 @@
+services:
+  macopedia_tpay.event_listener.callback.gateway:
+    class: Macopedia\Bundle\TpayBundle\EventListener\GatewayListener
+    lazy: true
+    arguments:
+      - '@request_stack'
+      - '@event_dispatcher'
+      - '@macopedia_tpay.payment_method_provider'
+    calls:
+      - [ 'setLogger', [ '@logger' ] ]
+    tags:
+      - { name: kernel.event_listener, event: oro_payment.callback.error, method: onError }
+      - { name: kernel.event_listener, event: oro_payment.callback.notify, method: onNotify }
+
+  macopedia_tpay.event_listener.order_payment_transaction_grid:
+    class: Macopedia\Bundle\TpayBundle\EventListener\TpayPaymentGridListener
+    arguments:
+      - '@doctrine'
+    tags:
+      - { name: kernel.event_listener, event: oro_datagrid.datagrid.build.before.order-payment-transactions-grid, method: onBuildBefore }
+      - { name: kernel.event_listener, event: oro_datagrid.datagrid.build.before.payment-transactions-grid, method: onBuildBefore }
+
+  macopedia_tpay.event_listener.create_order_listener:
+    class: Macopedia\Bundle\TpayBundle\EventListener\CreateOrderEventListener
+    tags:
+      - { name: kernel.event_listener, event: extendable_action.checkout_complete, method: onCreateOrder, priority: 10 }

@@ -1,0 +1,3 @@
+dynamic-imports:
+  orosale:
+    - orotpay/js/app/components/tpay-logs-component

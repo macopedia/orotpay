@@ -1,0 +1,42 @@
+system_configuration:
+  fields:
+    oro_tpay.apple_pay_domain_verification:
+      data_type: string
+      type: Symfony\Component\Form\Extension\Core\Type\TextareaType
+      search_type: text
+      priority: -10
+      options:
+        label: macopedia.tpay.system_configuration.fields.apple_pay_domain_verification.label
+        tooltip: macopedia.tpay.system_configuration.fields.apple_pay_domain_verification.tooltip
+
+  tree:
+    system_configuration:
+      commerce:
+        children:
+          sales:
+            children:
+              checkout:
+                children:
+                  checkout_options:
+                    children:
+                      - oro_tpay.apple_pay_domain_verification
+    organization_configuration:
+      commerce:
+        children:
+          sales:
+            children:
+              checkout:
+                children:
+                  checkout_options:
+                    children:
+                      - oro_tpay.apple_pay_domain_verification
+    website_configuration:
+      commerce:
+        children:
+          sales:
+            children:
+              checkout:
+                children:
+                  checkout_options:
+                    children:
+                      - oro_tpay.apple_pay_domain_verification

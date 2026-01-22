@@ -1,0 +1,98 @@
+macopedia:
+  tpay:
+    transaction_description: "Order #%orderId%"
+    apple_pay_label: 'Order payment'
+    navigation:
+      tpay:
+        header: 'Tpay - online payments'
+        payment_transactions: 'Payment transactions'
+    methods:
+      credit_card: "Card"
+      blik: "BLIK"
+      redirect: "You will be redirected to Tpay in order to pay for the order"
+      visa_mobile: 'VISA Mobile'
+    datagrid:
+      transaction_id:
+        label: 'Transaction ID'
+      transaction_title:
+        label: 'Title'
+    frontend:
+      errors:
+        required: 'This field is required'
+        required_channel: 'Choose one channel from the list'
+      legal:
+        regulations: 'Paying, <a href="%url%" target="blank">you accept the terms and conditions</a>.'
+        policy: 'The administrator of the personal data is Krajowy Integrator Płatności spółka akcyjna, based in Poznań. <a href="%url%" target="blank">Read the full content</a>.'
+
+      tips:
+        blik_code_info: 'BLIK code place at final step of the checkout'
+        pragma_info: "You will be redirect to Pay Later application & submit required information to complete order, credit verification follows."
+
+      labels:
+        blik:
+          token: "BLIK code"
+        card:
+          number: "Card number"
+          expiration_date:
+            full: "Expiration date"
+            month: "Month"
+            year: "Year"
+          cvv: "CVC2/CVV2"
+          save_for_later: "Save for later"
+        visa_mobile:
+          phone: "Phone number"
+      use_different_card: 'Use a different card'
+      use_authorized_card: 'Use an existing card'
+    system_configuration:
+      fields:
+        apple_pay_domain_verification:
+          label: 'Apple Pay domain verification'
+          tooltip: 'Apple Pay domain verification is required during payment process in the checkout, but availability of Apple Pay method is configured by Tpay Integration/Payment rules.'
+    settings:
+      gateway_configuration:
+        client_id: 'Client ID'
+        client_secret: 'Client secret'
+        production_mode: 'Production mode'
+        merchant_id: 'Merchant ID'
+        google_merchant_id: 'Google Merchant ID'
+        apple_merchant_id: 'Apple Merchant ID'
+        redirect_hidden_in_checkout: 'Hide payment with redirect in checkout'
+        merchant_rsa_key: 'Merchant RSA Key'
+        notification_security_code: '[Notification] Security code'
+        yes_label: 'Yes'
+        no_label: 'No'
+
+
+      labels.label: 'Labels payment with redirect labels'
+      short_labels.label: 'Short Labels payment with redirect labels'
+      blik.label: 'BLIK labels'
+      cards.label: 'Cards labels'
+      pay_by_links.label: 'Online payment labels'
+      visa_mobile.label: 'Visa Mobile labels'
+      pragma_pay.label: 'Pragma Pay labels'
+      apple_pay.label: 'Apple Pay labels'
+      google_pay.label: 'Google Pay labels'
+
+      transport:
+        label: 'Tpay'
+      validation:
+        wrong_credentials: 'Incorrect Tpay credendials'
+
+    channel_type:
+      label: 'Tpay'
+
+    payment_method_message: 'Pay with Tpay'
+
+    retry_payment:
+      button: 'Pay again'
+      header:
+        label: "Pay again"
+oro:
+  payment:
+    paymenttransaction:
+      types:
+        failed:
+          label: "Failed"
+
+        saved_card:
+          label: "Saved card"

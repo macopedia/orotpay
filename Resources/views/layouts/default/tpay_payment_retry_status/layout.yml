@@ -1,0 +1,46 @@
+layout:
+    imports:
+        -
+            id: oro_customer_page
+
+
+    actions:
+        - '@setBlockTheme':
+            themes: 'layout.html.twig'
+
+        - '@setOption':
+            id: page_title
+            optionName: defaultValue
+            optionValue:
+                label: 'macopedia.tpay.retry_payment.header.label'
+
+        - '@addTree':
+            items:
+                order_retry_payment_status_container:
+                    blockType: container
+
+                order_retry_payment_message:
+                    blockType: text
+                    options:
+                      text: '=data["status"]'
+
+                order_retry_payment_status_buttons:
+                  blockType: container
+
+                order_retry_payment_back_to_order:
+                  blockType: link
+                  options:
+                    route_name: oro_order_frontend_view
+                    route_parameters:
+                      id: '=data["order_id"]'
+                    text: 'macopedia.tpay.retry_payment.button.back_to_order'
+                    attr:
+                      'class': 'btn btn--outlined '
+                    icon: 'close'
+
+            tree:
+                page_content:
+                  order_retry_payment_status_container:
+                    order_retry_payment_message: ~
+                    order_retry_payment_status_buttons:
+                      order_retry_payment_back_to_order: ~

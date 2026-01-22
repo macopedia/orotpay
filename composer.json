@@ -1,0 +1,31 @@
+{
+  "name": "macopedia/orotpay",
+  "description": "Official Tpay integration for OroCommerce 6.x",
+  "type": "symfony-bundle",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Macopedia\\Bundle\\TpayBundle\\": ""
+    },
+    "exclude-from-classmap": [
+      "/Tests/"
+    ]
+  },
+  "authors": [
+    {
+      "name": "Tomasz Woldański",
+      "email": "extensions@macopedia.com"
+    }
+  ],
+  "prefer-stable": true,
+  "require": {
+    "php": "~8.4",
+    "oro/commerce": "^6.*",
+    "tpay-com/tpay-openapi-php": "^2"
+  },
+  "extra": {
+    "npm": {
+      "intl-tel-input": "^25.11.2"
+    }
+  }
+}

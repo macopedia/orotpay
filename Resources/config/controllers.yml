@@ -1,0 +1,26 @@
+services:
+  _defaults:
+    public: true
+
+  Macopedia\Bundle\TpayBundle\Controller\Frontend\TpayController:
+    calls:
+      - [ 'setContainer', [ '@Psr\Container\ContainerInterface' ] ]
+    tags:
+      - { name: container.service_subscriber }
+      - { name: container.service_subscriber, id: oro_payment.manager.payment_status }
+      - { name: container.service_subscriber, id: oro_action.action_executor }
+      - { name: container.service_subscriber, id: oro_checkout.provider.payment_context }
+      - { name: container.service_subscriber, id: oro_payment.method.provider.applicable_methods_provider }
+      - { name: container.service_subscriber, id: macopedia_tpay.retry.method_provider }
+
+  Macopedia\Bundle\TpayBundle\Controller\Frontend\ApplePayController:
+    calls:
+      - [ 'setContainer', [ '@Psr\Container\ContainerInterface' ] ]
+    tags:
+      - { name: container.service_subscriber }
+
+  Macopedia\Bundle\TpayBundle\Controller\TransactionController:
+    calls:
+      - [ setContainer, [ '@Psr\Container\ContainerInterface' ] ]
+    tags:
+      - { name: container.service_subscriber }

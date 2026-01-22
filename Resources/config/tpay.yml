@@ -1,0 +1,102 @@
+services:
+  macopedia_tpay.gateway.cache:
+    parent: oro.data.cache
+    public: false
+    tags:
+      - { name: 'cache.pool', namespace: 'oro_tpay_gateway' }
+
+  macopedia_tpay.tpay.channel_provider:
+    class: Macopedia\Bundle\TpayBundle\Tpay\TpayChannelProvider
+    arguments:
+      - '@logger'
+      - '@macopedia_tpay.gateway.factory'
+      - '@macopedia_tpay.gateway.cache'
+      - '@oro.cache.generator.universal_cache_key'
+      - '@oro_payment.method.provider.applicable_methods_provider'
+      - '%oro_tpay.channels.expiresAfter%'
+
+  Macopedia\Bundle\TpayBundle\Twig\Extension\LogExtension:
+    tags:
+      - { name: twig.extension }
+
+  macopedia_tpay.retry.method_provider:
+    class: Macopedia\Bundle\TpayBundle\Provider\RetryMethodProvider
+    arguments:
+      - '@oro_payment.method.provider.applicable_methods_provider'
+      - '@oro_order.factory.payment_context'
+      - '@oro_payment.manager.payment_status'
+    tags:
+      - { name: layout.data_provider, alias: macopedia_tpay_retry_method_provider }
+
+  macopedia.tpay.provider.transactions:
+    class: Macopedia\Bundle\TpayBundle\Provider\TransactionProvider
+    arguments:
+      - '@doctrine'
+      - '@oro_payment.repository.payment_transaction'
+      - '%oro_tpay.automatic_cancellation.after%'
+
+  macopedia_tpay.action.handler.cancel:
+    class: Macopedia\Bundle\TpayBundle\Handler\CancelHandler
+    arguments:
+      - '@oro_payment.provider.payment_transaction'
+      - '@macopedia_tpay.payment_method_provider'
+      - '@macopedia.tpay.provider.transactions'
+      - '@macopedia_tpay.payment_method.config.provider'
+      - '@logger'
+
+  Macopedia\Bundle\TpayBundle\Command\CancelAbandonedPaymentTransactionsCommand:
+    arguments:
+      - '@macopedia_tpay.action.handler.cancel'
+      - '%oro_tpay.automatic_cancellation.cron_definition%'
+    tags:
+      - { name: console.command }
+
+  macopedia_tpay.factory.notification_verifier:
+    class: Macopedia\Bundle\TpayBundle\Tpay\NotificationVerifierFactory
+    arguments:
+      - '@macopedia_tpay.gateway.cache'
+
+  macopedia_tpay.payment.card.saved_card_handler:
+    class: Macopedia\Bundle\TpayBundle\Tpay\SavedCardHandler
+    arguments:
+      - '@oro_entity.doctrine_helper'
+      - '@oro_customer.security.customer_user_provider'
+      - '@oro_payment.provider.payment_transaction'
+
+  Macopedia\Bundle\TpayBundle\Tpay\SavedCardInterface:
+    alias: 'macopedia_tpay.payment.card.saved_card_handler'
+
+  macopedia_tpay.payment.payload.factory:
+    class: Macopedia\Bundle\TpayBundle\Tpay\Payload\PayloadFactory
+    autowire: true
+    autoconfigure: true
+
+  Macopedia\Bundle\TpayBundle\Tpay\Payload\CreateTransactionPayload:
+    arguments:
+      - '@router'
+      - '@oro_entity.doctrine_helper'
+      - '@translator'
+      - '@oro_locale.provider.current_localization'
+      - '@request_stack'
+      - '%oro_tpay.tax_field%'
+
+  macopedia_tpay.payment.payload.createtransaction:
+    alias: Macopedia\Bundle\TpayBundle\Tpay\Payload\CreateTransactionPayload
+
+  macopedia_tpay.payment.response.factory:
+    class: Macopedia\Bundle\TpayBundle\Tpay\Response\ResponseFactory
+    arguments:
+      - '@logger'
+
+  macopedia_tpay.gateway.factory:
+    class: Macopedia\Bundle\TpayBundle\Tpay\GatewayFactory
+    arguments:
+      - '@macopedia_tpay.gateway.cache'
+      - "@=parameter('oro_tpay.gateway.logging') ? service('monolog.logger.tpay'): null"
+
+  Macopedia\Bundle\TpayBundle\Tpay\Payload\Method\:
+    resource: '../../Tpay/Payload/Method/*'
+    autowire: true
+    autoconfigure: true
+    tags:
+      - { name: oro_tpay.payment.method.payload.processor }

@@ -1,0 +1,102 @@
+{% block _payment_methods_tpay_card_view_widget %}
+    <div class="{{ class_prefix }}-form__payment-methods">
+        {{ form_widget(
+            view.options.formView,
+            {class_prefix: class_prefix, paymentMethod: name, options: view.options}
+        ) }}
+    </div>
+{% endblock %}
+
+{% block _payment_methods_tpay_blik_widget %}
+    <div class="{{ class_prefix }}-form__payment-methods">
+        {% set paymentMethod = name %}
+        {% set options = view.options %}
+        {{ 'macopedia.tpay.frontend.tips.blik_code_info'|trans }}
+    </div>
+{% endblock %}
+
+{% block _payment_methods_tpay_google_pay_widget %}
+    {% set component = view.options.compontent|default('orotpay/js/app/components/google-pay-select-component') %}
+    {% set componentOptions = view.options.componentOptions|default({})|merge({paymentMethod: name}) %}
+
+    <div class="{{ class_prefix }}-form__payment-methods"  data-page-component-module="{{ component }}"
+         data-page-component-options="{{ componentOptions|json_encode }}">
+        {% set options = view.options %}
+        {{ block('_oro_tpay_policy', '@OroTpay/layouts/default/imports/oro_payment_method_options/_legal.html.twig') }}
+    </div>
+{% endblock %}
+
+{% block _payment_methods_tpay_apple_pay_widget %}
+    {% set component = view.options.compontent|default('orotpay/js/app/components/apple-pay-select-component') %}
+    {% set componentOptions = view.options.componentOptions|default({})|merge({paymentMethod: name}) %}
+
+    <div class="{{ class_prefix }}-form__payment-methods"  data-page-component-module="{{ component }}"
+         data-page-component-options="{{ componentOptions|json_encode }}">
+        {% set options = view.options %}
+        {{ block('_oro_tpay_policy', '@OroTpay/layouts/default/imports/oro_payment_method_options/_legal.html.twig') }}
+    </div>
+{% endblock %}
+
+{% block _payment_methods_tpay_visa_mobile_widget %}
+    <div class="{{ class_prefix }}-form__payment-methods">
+        {{ form_widget(
+            view.options.formView,
+            {class_prefix: class_prefix, paymentMethod: name, options: view.options}
+        ) }}
+    </div>
+{% endblock %}
+
+{% block _payment_methods_tpay_pay_by_link_widget %}
+    {% set pblComponent = view.options.blikCompontent|default('orotpay/js/app/components/pay-by-link-component') %}
+    {% set pblComponentOptions = view.options.pblComponentOptions|default({})|merge({paymentMethod: name}) %}
+
+    <div class="{{ class_prefix }}-form__payment-methods {{ class_prefix }}-pay-by-link-container" data-page-component-module="{{ pblComponent }}"
+         data-page-component-options="{{ pblComponentOptions|json_encode }}">
+
+        <div class="{{ class_prefix }}-form__payment-methods-form" data-pbl-form="data-pbl-form">
+            <div class="{{ class_prefix }}-bank-list">
+                {% for channel in view.options.channels %}
+                    <div class="{{ class_prefix }}-bank-list__item">
+                        <label for="oro_tpay_channel_id_{{ channel.mainChannel }}">
+                            <img src="{{ channel.img }}" alt="{{ channel.name }}">
+                        </label>
+                        <input id="oro_tpay_channel_id_{{ channel.mainChannel }}" type="radio" name="oro_tpay_pbl[channel_id]"
+                               data-channel="{{ channel.mainChannel }}" value="{{ channel.mainChannel }}" class="checkbox__label" data-error-msg="{{ 'macopedia.tpay.frontend.errors.required_channel'|trans }}">
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        {% set paymentMethod = name %}
+        {% set options = view.options %}
+        {{ block('_oro_tpay_policy', '@OroTpay/layouts/default/imports/oro_payment_method_options/_legal.html.twig') }}
+    </div>
+
+{% endblock %}
+
+{% block _payment_methods_tpay_redirect_widget %}
+    <div class="{{ class_prefix }}-form__payment-methods">
+        {% set redirectComponent = view.options.redirectComponent|default('orotpay/js/app/components/redirect-component') %}
+        {% set redirectComponentOptions = view.options.redirectComponentOptions|default({})|merge({paymentMethod: name}) %}
+
+        <div class="form-row" data-page-component-module="{{ redirectComponent }}"
+             data-page-component-options="{{ redirectComponentOptions|json_encode }}">
+            {{ 'macopedia.tpay.methods.redirect'|trans }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block _payment_methods_tpay_pragma_pay_widget %}
+    <div class="{{ class_prefix }}-form__payment-methods">
+        {% set redirectComponent = view.options.redirectComponent|default('orotpay/js/app/components/redirect-component') %}
+        {% set redirectComponentOptions = view.options.redirectComponentOptions|default({})|merge({paymentMethod: name}) %}
+
+        <div class="form-row" data-page-component-module="{{ redirectComponent }}"
+             data-page-component-options="{{ redirectComponentOptions|json_encode }}">
+            {{ 'macopedia.tpay.frontend.tips.pragma_info'|trans }}
+        </div>
+        {% set paymentMethod = name %}
+        {% set options = view.options %}
+        {{ block('_oro_tpay_policy', '@OroTpay/layouts/default/imports/oro_payment_method_options/_legal.html.twig') }}
+    </div>
+{% endblock %}

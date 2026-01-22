@@ -1,0 +1,21 @@
+services:
+  Macopedia\Bundle\TpayBundle\Method\View\TpayApplePayView:
+    arguments:
+      - '@form.factory'
+      - '@macopedia_tpay.legal'
+      - '@router'
+      - '@request_stack'
+      - '@translator'
+    tags:
+      - { name: oro_tpay.payment.method.view }
+
+  Macopedia\Bundle\TpayBundle\Method\TpayApplePayMethod:
+    arguments:
+      - '@macopedia_tpay.payment.payload.factory'
+      - '@macopedia_tpay.gateway.factory'
+      - '@macopedia_tpay.payment.response.factory'
+      - '@logger'
+      - '@macopedia_tpay.factory.notification_verifier'
+      - '@macopedia_tpay.tpay.channel_provider'
+    tags:
+      - { name: oro_tpay.payment.method }

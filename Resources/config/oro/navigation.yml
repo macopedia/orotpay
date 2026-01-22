@@ -1,0 +1,20 @@
+navigation:
+  menu_config:
+    items:
+      tpay:
+        label: 'macopedia.tpay.navigation.tpay.header'
+        uri: '#'
+        position: 1000
+
+      tpay_logs:
+        label: 'macopedia.tpay.navigation.tpay.payment_transactions'
+        route: 'tpay_transactions_list'
+
+    tree:
+      application_menu:
+        children:
+          sales_tab:
+            children:
+              tpay:
+                children:
+                  tpay_logs: ~

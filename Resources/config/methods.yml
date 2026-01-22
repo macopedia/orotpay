@@ -1,0 +1,71 @@
+imports:
+  - { resource: 'methods/redirect.yml' }
+  - { resource: 'methods/blik.yml' }
+  - { resource: 'methods/pay_by_link.yml' }
+  - { resource: 'methods/card.yml' }
+  - { resource: 'methods/pragma_pay.yml' }
+  - { resource: 'methods/visa_mobile.yml' }
+  - { resource: 'methods/apple_pay.yml' }
+  - { resource: 'methods/google_pay.yml' }
+
+services:
+  # helpers
+  macopedia_tpay.legal:
+    class: Macopedia\Bundle\TpayBundle\Tpay\TpayLegal
+    arguments:
+      - '@oro_locale.provider.current_localization'
+    tags:
+      - { name: layout.data_provider, alias: macopedia_tpay_legal }
+
+  # integration
+  macopedia_tpay.integration.channel:
+    class: Macopedia\Bundle\TpayBundle\Integration\TpayChannelType
+    public: true
+    tags:
+      - { name: oro_integration.channel, type: tpay }
+
+  macopedia_tpay.integration.transport:
+    class: Macopedia\Bundle\TpayBundle\Integration\TpayTransport
+    public: false
+    tags:
+      - { name: oro_integration.transport, type: tpay, channel_type: tpay }
+
+  # factories
+  macopedia_tpay.identifier_generator:
+    parent: oro_integration.generator.prefixed_identifier_generator
+    public: true
+    arguments:
+      - '%oro_tpay.payment.method.identifier_prefix%'
+
+  macopedia_tpay.factory.config:
+    class: Macopedia\Bundle\TpayBundle\Method\Config\Factory\TpayConfigFactory
+    public: false
+    arguments:
+      - '@oro_locale.helper.localization'
+      - '@macopedia_tpay.identifier_generator'
+
+  # providers
+  macopedia_tpay.payment_method.config.provider:
+    class: Macopedia\Bundle\TpayBundle\Method\Config\Provider\TpayConfigProvider
+    arguments:
+      - '@doctrine'
+      - '@logger'
+      - '@macopedia_tpay.factory.config'
+      - '%oro_tpay.payment.method.identifier_prefix%'
+
+  macopedia_tpay.payment_method_provider:
+    class: Macopedia\Bundle\TpayBundle\Method\Provider\TpayMethodProvider
+    autowire: true
+    arguments:
+      - '@macopedia_tpay.payment_method.config.provider'
+
+    tags:
+      - { name: oro_payment.payment_method_provider }
+
+  macopedia_tpay.payment_method_view_provider:
+    class: Macopedia\Bundle\TpayBundle\Method\View\Provider\TpayViewProvider
+    autowire: true
+    arguments:
+      - '@macopedia_tpay.payment_method.config.provider'
+    tags:
+      - { name: oro_payment.payment_method_view_provider }

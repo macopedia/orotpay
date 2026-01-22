@@ -1,0 +1,135 @@
+.checkout-pay-by-link-container {
+  max-width: 1200px;
+}
+
+.checkout-form__payment-methods-form {
+  .checkbox-label {
+    gap: 4px;
+  }
+}
+
+.checkout-form__payment-methods-different-card-handle {
+  margin-top: 10px;
+}
+
+.checkout-bank-list {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-top: 30px;
+  margin-bottom: 10px;
+  position: relative;
+
+  .validation-failed {
+    position: absolute;
+    top: 0;
+  }
+
+  &__item {
+    width: 100%;
+    max-width: 154px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    display: inline-flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+
+    label {
+      min-height: 64px;
+      margin-bottom: 10px;
+      display: inline-flex;
+      flex-direction: row-reverse;
+      flex-wrap: wrap;
+      align-content: center;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    img {
+      max-width: 100px;
+      width: 100%;
+    }
+  }
+}
+
+.tpay {
+  &-card-select {
+    .select2-choice {
+      span {
+        vertical-align: middle;
+      }
+
+      .credit-card-icon {
+        display: inline-block;
+        margin-right: 10px;
+
+        + span {
+          display: inline-block;
+        }
+      }
+    }
+  }
+
+  &-legal {
+    padding: 10px 0;
+
+    .form-row {
+      margin-bottom: 10px;
+    }
+  }
+
+  &-blik-form {
+    padding: 30px;
+    max-width: 464px;
+
+    input {
+      max-width: 240px;
+    }
+  }
+
+  // mobile confirm (blik, visa etc)
+  &-overlay {
+    position: relative;
+
+    &-confirm-modal {
+      background: #fff;
+      border: 1px solid #ccc;
+      box-shadow: 1px 0 6px rgba(0, 0, 0, 0.3);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -80%);
+      width: 300px;
+      height: 300px;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      align-content: center;
+      flex-wrap: wrap;
+      flex-direction: column;
+
+      img {
+        width: 116px;
+        margin-bottom: 25px;
+      }
+    }
+  }
+}
+
+:root {
+  --iti-path-flags-1x: url('#{$global-url}/orotpay/img/flags.png');
+  --iti-path-flags-2x: url('#{$global-url}/orotpay/img/flags@2x.png');
+  --iti-path-globe-1x: url('#{$global-url}/orotpay/img/globe.png');
+  --iti-path-globe-2x: url('#{$global-url}/orotpay/img/globe@2x.png');
+}
+

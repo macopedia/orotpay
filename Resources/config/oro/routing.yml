@@ -1,0 +1,18 @@
+oro_tpay_status:
+  resource:     "@OroTpayBundle/Controller/Frontend/TpayController.php"
+  type:         attribute
+  prefix:       /tpay
+  options:
+    frontend: true
+
+oro_tpay_apple:
+  resource:     "@OroTpayBundle/Controller/Frontend/ApplePayController.php"
+  type:         attribute
+  options:
+    frontend: true
+
+
+oro_tpay_backend:
+  resource:     "@OroTpayBundle/Controller/TransactionController.php"
+  type:         attribute
+  prefix:       /
