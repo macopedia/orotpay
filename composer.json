@@ -20,7 +20,7 @@
   "prefer-stable": true,
   "require": {
     "php": "~8.4",
-    "oro/commerce": "^6.*",
+    "oro/commerce": "^6.0",
     "tpay-com/tpay-openapi-php": "^2"
   },
   "extra": {
