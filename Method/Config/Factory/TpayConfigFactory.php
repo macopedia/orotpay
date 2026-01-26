@@ -33,7 +33,10 @@ readonly class TpayConfigFactory implements TpayConfigFactoryInterface
         $params[TpayConfig::FIELD_LABEL] = $this->getLocalizedValue($settings->getLabels());
         $params[TpayConfig::FIELD_SHORT_LABEL] = $this->getLocalizedValue($settings->getShortLabels());
         $params[TpayConfig::FIELD_ADMIN_LABEL] = $channel?->getName();
-        $params[TpayConfig::FIELD_PAYMENT_METHOD_IDENTIFIER] = $this->getPaymentMethodIdentifier($channel);
+
+        if ($channel) {
+            $params[TpayConfig::FIELD_PAYMENT_METHOD_IDENTIFIER] = $this->getPaymentMethodIdentifier($channel);
+        }
 
         $params[TpayConfig::FIELD_PRODUCTION_MODE] = $settings->isProductionMode();
         $params[TpayConfig::FIELD_CLIENT_ID] = $settings->getClientId();
