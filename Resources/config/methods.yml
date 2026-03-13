@@ -8,6 +8,9 @@ imports:
   - { resource: 'methods/apple_pay.yml' }
   - { resource: 'methods/google_pay.yml' }
 
+parameters:
+  oro_tpay.payment.method.identifier_prefix: tpay
+
 services:
   # helpers
   macopedia_tpay.legal:

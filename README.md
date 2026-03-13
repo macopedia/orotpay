@@ -36,6 +36,10 @@ Execute the following command in your project root:
 composer req macopedia/orotpay
 ```
 ### 2. Run database migrations & load translations
+- Clear the application cache
+```
+php bin/console cache:clear
+```
 -  Execute migrations
 ```
 php bin/console oro:platform:update --force
@@ -52,10 +56,11 @@ php bin/console cache:clear
    [Resources/config/parameters.yml](./Resources/config/parameters.yml)
 2. **Deployment:** Deploy the changes to your OroCommerce instance (**remember: run migrations on first deployment!**)
 3. **Go to ORO admin panel:**
-    * Navigate to the OroCommerce admin panel.
-    * Go to **System > Integrations > Manage Integrations**.
-    * Create a new integration, select **Tpay**, provide your API credentials and select production or sandbox mode
-    * Configure your desired payment methods within **System > Payment Rules**.
+   * Navigate to the OroCommerce admin panel.
+   * Go to **System > Integrations > Manage Integrations**.
+   * Create a new integration, select **Tpay**, provide your API credentials and select production or sandbox mode
+   * Configure your desired payment methods within **System > Payment Rules**.
+4. Note: By default, the extension sends the client IP address to the gateway for processing in prod environments; in dev mode, this is disabled. Since the gateway validates IP addresses, ensure your server is properly configured to forward user IPs to the Oro application to avoid processing errors. For local development, please use OroCommerce in dev mode.
 
 ### 4. Documentation
 Documentation for the extension is available on Tpay's website in:

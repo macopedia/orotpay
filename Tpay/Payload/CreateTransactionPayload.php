@@ -25,6 +25,7 @@ readonly class CreateTransactionPayload implements TransactionPayloadInterface
         protected LocalizationProviderInterface $localizationProvider,
         protected RequestStack $requestStack,
         protected ?string $taxField = null,
+        protected string $kernelEnvironment = 'prod',
     ) {
     }
 
@@ -78,7 +79,7 @@ readonly class CreateTransactionPayload implements TransactionPayloadInterface
             'code' => $billingAddress?->getCustomerUserAddress()?->getPostalCode() ?? $billingAddress?->getCustomerAddress()?->getPostalCode() ?? '',
             'country' => $billingAddress?->getCustomerUserAddress()?->getCountry()?->getIso2Code() ?? $billingAddress?->getCustomerAddress()?->getCountry()?->getIso2Code() ?? '',
             // extra fields
-            'ip' => $request?->getClientIp(),
+            'ip' => $this->kernelEnvironment === 'prod' ? $request?->getClientIp() : '',
             'userAgent' => substr(strip_tags((string) $request?->headers->get('User-Agent')), 0, 255),
             'taxId' => $this->getCustomerTaxId($order),
         ];
