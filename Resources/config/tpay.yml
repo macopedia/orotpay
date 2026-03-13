@@ -79,6 +79,7 @@ services:
       - '@oro_locale.provider.current_localization'
       - '@request_stack'
       - '%oro_tpay.tax_field%'
+      - '%kernel.environment%'
 
   macopedia_tpay.payment.payload.createtransaction:
     alias: Macopedia\Bundle\TpayBundle\Tpay\Payload\CreateTransactionPayload
