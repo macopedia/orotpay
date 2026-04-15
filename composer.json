@@ -1,7 +1,6 @@
 {
   "name": "macopedia/orotpay",
   "description": "Official Tpay integration for OroCommerce 6.x",
-  "type": "symfony-bundle",
   "license": "MIT",
   "autoload": {
     "psr-4": {
@@ -19,9 +18,10 @@
   ],
   "prefer-stable": true,
   "require": {
-    "php": "~8.4",
+    "php": "^8.3",
     "oro/commerce": "^6.0",
-    "tpay-com/tpay-openapi-php": "^2"
+    "tpay-com/tpay-openapi-php": "^2",
+    "symfony/polyfill-php84": "^1.35"
   },
   "extra": {
     "npm": {
